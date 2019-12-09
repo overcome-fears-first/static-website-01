@@ -89,5 +89,32 @@ resource "aws_instance" "web" {
           private_key = file("~/.ssh/key/key.pem.insecure")
     }
   }
+
+  provisioner "file" {
+    source = "index.html"
+    destination = "index.html"
+    connection {
+      host = self.public_ip
+      type = "ssh"
+      user = "ubuntu"
+      private_key = file("~/.ssh/key/key.pem.insecure")
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt install -y apache2",
+      "sudo ufw allow 80",
+      "sudo mv /var/www/html/index.html /var/www/html/ubuntu.html",
+      "sudo mv index.html /var/www/html",
+      "sudo chmod 644 /var/www/html/index.html",
+    ]
+    connection {
+      host = self.public_ip
+      type = "ssh"
+      user = "ubuntu"
+      private_key = file("~/.ssh/key/key.pem.insecure")
+    }
+  }
 }
 
