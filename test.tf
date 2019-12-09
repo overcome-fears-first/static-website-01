@@ -1,6 +1,6 @@
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLd0OZUBYHTxZQlHyU7gQiq2cgvi5s9Z6Joi0mPSAJ4/Csr3wcod50VTbNmWqCdcDzwRAeOdL2eNoyz6IqTWeJFBTqb6kHE6KLADvaQy9YjrkutXhRYQJXnF4e22NDrYNhNR4SnFACYpNb+ZTmlcOC6B+8Iw8LXhSbEzC2XHBs2MrSfZsEONQ3Sg9boGiEjI1pCrrgODypUob7B4gkjntv+b74ENgBqZr/UYNwM1pHGBmYvbYz48odfZDu72igjzJ/Wmt6KfwpDAchWxekHkMfDhCedY4YHJsoVw5QI07DpUTJM49gGVQGlZ8CdPogqbQ2EtIK5ytMcDFZJY6lZ8sfmlocPTON0sPlhPevdSaTOqmjEnDxznGnyIOrDMDNVMFsc+Zw2B4k/e7lUOFeEWD7mh8KQQCheb6olHuGy4vWyjg9uBpot0TJUZvs9luSYYf9No2BWHzaEf9FXWjW4x8BMPmCLxRo5JEVbhfGO3twLZ1z2IU4+uGkiNJht8PGADc= overcome.fears.first@gmail.com"
+resource "aws_key_pair" "deployer_1" {
+  key_name   = "deployer_key_name_1"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLnYL0XELYn9p1XkpypagdsLwRo3fuDU24KuMOMsX2nLDyzmQtyyOz1bY+Y7tXV9Ny6Z9uTadSx3ckbLy43BgKqjY7OOuxLFGsAgqXaZeFXMqPesDrH96+MXX6CcfuktfGlYfUz2NPgyfml34568Lho6oGiGZw8eYISUl5vociWxSkl8q5ymWFEUpYWenL/D8Nt+szQ2XK6AxpUx/rsfvrXFRtGj1eMhCQXfeMZPZpd39v3qWEzd4zVBio+D7Yo7I2jx+1HeTtXtfSsPiZxvMzotEGqJhWyOf/3imE/wEov6+vQehPWEtd/GS1m9ZGtd1P2RCLh86ku8MitVzvRGS/"
 }
 
 variable "server_prefix" {
@@ -60,7 +60,7 @@ resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   count         = var.instance_count
-  key_name      = aws_key_pair.deployer.key_name
+  key_name      = aws_key_pair.deployer_1.key_name
   #subnet_id     = aws_subnet.my_subnet.id
 
   tags = {
@@ -74,7 +74,7 @@ resource "aws_instance" "web" {
           host     = self.public_ip
           type     = "ssh"
           user     = "ubuntu"
-          private_key = file("~/.ssh/yourname.pem.insecure")
+          private_key = file("~/.ssh/key/key.pem.insecure")
     }
   }
 
@@ -86,7 +86,7 @@ resource "aws_instance" "web" {
           host     = self.public_ip
           type     = "ssh"
           user     = "ubuntu"
-          private_key = file("~/.ssh/yourname.pem.insecure")
+          private_key = file("~/.ssh/key/key.pem.insecure")
     }
   }
 }
