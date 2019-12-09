@@ -1,0 +1,9 @@
+home directory should have a load_creds.sh like this:
+
+#!/bin/bash
+export AWS_ACCESS_KEY_ID="secret"
+export AWS_SECRET_ACCESS_KEY="secret"
+export AWS_DEFAULT_REGION="us-east-1"
+#AWS_SESSION_TOKEN
+#AWS_SHARED_CREDENTIALS_FILE
+#AWS_PROFILE

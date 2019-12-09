@@ -1,0 +1,5 @@
+cd ~/.ssh/key
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+chmod 400 key.pem
+ssh-keygen -y -f key.pem > key.pub
+openssl rsa -in key.pem -out key.pem.insecure && chmod 0400 key.pem.insecure

@@ -1,0 +1,8 @@
+~/.ssh/config should look like this:
+
+
+Host github.com-overcome-fears-first
+ HostName github.com
+ AddKeysToAgent yes
+ User git
+ IdentityFile ~/.ssh/id_rsa
